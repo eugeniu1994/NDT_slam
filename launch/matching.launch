@@ -1,0 +1,26 @@
+<launch>
+    <!-- declare arguments with default values -->
+    <arg name="max_iter" default="15" />
+    <arg name="ndt_step_size"  default="0.1" />
+    <arg name="ndt_resolution"  default="7.0" />
+    <arg name="T_epsilon"  default="0.01" />
+    <arg name="voxel_leaf_size" default="3.0" />
+    <arg name="scan_rate" default="10.0" />
+    <arg name="min_range" default="7.0" />
+    <arg name="max_range" default="50.0" />
+    <arg name="NDT_ICP" default="false" />
+
+    <node pkg="lidar_scan_matching" type="talker" name="talker" output="screen" clear_params="true">
+        <param name="max_iter" type="int" value="$(arg max_iter)"/>
+        <param name="ndt_step_size" type="double" value="$(arg ndt_step_size)"/>
+        <param name="ndt_resolution"  type="double"  value="$(arg ndt_resolution)"/>
+        <param name="T_epsilon"  type="double"  value="$(arg T_epsilon)"/>
+        <param name="voxel_leaf_size"  type="double"  value="$(arg voxel_leaf_size)"/>
+        <param name="scan_rate"  type="double"  value="$(arg scan_rate)"/>
+        <param name="min_range"  type="double"  value="$(arg min_range)"/>
+        <param name="max_range"  type="double"  value="$(arg max_range)"/>
+        <param name="NDT_ICP" value="$(arg NDT_ICP)"/>
+    </node>
+
+    <node pkg="rviz"  type="rviz"  name="rviz"  args="-d $(find lidar_scan_matching)/config/mapping.rviz"></node>
+</launch>
